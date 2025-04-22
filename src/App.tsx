@@ -2,10 +2,12 @@ import "./App.css";
 import { TaskType, Todolist } from "./Todolist";
 
 function App() {
+
   const tasks1 = [
     { id: 1, title: "CSS", isDone: true },
     { id: 2, title: "JS", isDone: true },
     { id: 3, title: "React", isDone: false },
+    { id: 4, title: "React", isDone: false },
   ];
 
   const tasks2: Array<TaskType> = [
