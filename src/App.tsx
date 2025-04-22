@@ -1,37 +1,44 @@
+import { useState } from "react";
 import "./App.css";
 import { TaskType, Todolist } from "./Todolist";
 
-function App() {
+export type FilterValuesType = "all" | "completed" | "active";
 
-  const tasks1 = [
+function App() {
+  
+  const [tasks, setTasks] = useState<Array<TaskType>>([
     { id: 1, title: "CSS", isDone: true },
     { id: 2, title: "JS", isDone: true },
     { id: 3, title: "React", isDone: false },
     { id: 4, title: "React", isDone: false },
-  ];
+  ]);
 
-  const tasks2: Array<TaskType> = [
-    { id: 1, title: "Sample", isDone: true },
-    { id: 2, title: "Sample2", isDone: false },
-    { id: 3, title: "Sample3", isDone: true },
-  ];
+  const [filter, setFilter] = useState<FilterValuesType>("all");
 
-  const tasks3 = [
-    { id: 1, title: "Desc", isDone: false },
-    { id: 2, title: "Desc", isDone: false },
-    { id: 3, title: "Desc", isDone: true },
-  ];
+  function removeTask(id: number) {
+  const filteredTasks = tasks.filter(t => t.id !== id )
+  setTasks(filteredTasks);
+  }
+
+  function changeFilter(value: FilterValuesType) {
+setFilter(value);
+  }
+
+  let tasksForTodoList = tasks;
+  if (filter == "completed") {
+    tasksForTodoList = tasks.filter(t => t.isDone === true);
+  }
+  if (filter == "active") {
+    tasksForTodoList = tasks.filter(t => t.isDone === false);
+  }
 
   return (
     <div className="App">
-      <Todolist title="What to learn" tasks={tasks1} />
-      <Todolist title="Movies" tasks={tasks2} />
-      <Todolist title="Books" tasks={tasks3} />
-
-      {/* <input type="checkbox"></input>
-      <input type="date"></input>
-      <input placeholder="sample description"></input> */}
-    </div>
+      <Todolist title="What to learn"
+       tasks={tasksForTodoList}
+       removeTask = {removeTask}
+       changeFilter = {changeFilter} />
+      </div>
   );
 }
 
