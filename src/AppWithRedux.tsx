@@ -70,7 +70,7 @@ function App() {
     }
 
     function addTask(title: string, todolistId: string) {
-        const newTask = { id: v1(), title: title, isDone: false };
+        const newTask = { id: v1(), title, isDone: false };
         const tasks = tasksObj[todolistId];
         const newTasks = [newTask, ...tasks];
         setTasks({ ...tasksObj, [todolistId]: newTasks });
