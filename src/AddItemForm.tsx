@@ -1,19 +1,24 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { IconButton, TextField } from '@mui/material';
 import { ControlPoint } from '@mui/icons-material';
+import React from 'react';
 
 type addItemFormPropsType = {
     addItem: (title: string) => void;
 };
 
-export function AddItemForm(props: addItemFormPropsType) {
+export const AddItemForm = React.memo((props: addItemFormPropsType) => {
     const [title, setTitle] = useState('');
     const [error, setError] = useState<string | null>(null);
+
     const onChangehandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value);
     };
+
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        if (error !== null) {
+            setError(null);
+        }
         if (e.key === 'Enter') {
             if (title.trim()) {
                 props.addItem(title.trim());
@@ -44,8 +49,8 @@ export function AddItemForm(props: addItemFormPropsType) {
                 helperText={error}
             />
             <IconButton onClick={addTask} color={'primary'}>
-                <ControlPoint/>
+                <ControlPoint />
             </IconButton>
         </div>
     );
-}
+});

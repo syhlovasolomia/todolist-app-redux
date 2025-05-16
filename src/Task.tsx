@@ -28,7 +28,7 @@ type PropsType = {
     changeTodoListTitle: (id: string, newTitle: string) => void;
 };
 
-export const Todolist = memo(
+export const Task = memo(
     ({ id, title, changeFilter, filter, removeTodoList, changeTodoListTitle }: PropsType) => {
         const dispatch = useDispatch();
         const tasks = useSelector<AppRootState, TaskType[]>((state) => state.tasks[id] || []);
