@@ -74,7 +74,6 @@ function AppWithRedux() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6">News</Typography>
-                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
             <Container fixed>
